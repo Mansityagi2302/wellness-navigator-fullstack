@@ -203,7 +203,9 @@ def router(state: CoachState) -> str:
 
 
 # Create the graph with entrypoint START
-graph = StateGraph(CoachState, entrypoint="START")
+# Corrected code
+graph = StateGraph(CoachState)
+graph.set_entry_point("START")
 
 # Add nodes
 from langgraph.graph import END, StateGraph, START # Ensure START is imported

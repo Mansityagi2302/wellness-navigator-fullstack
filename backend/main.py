@@ -73,17 +73,18 @@ RESILIENCE_KEYWORDS = {"anxiety", "sleep", "meditation", "stress", "burnout"}
 WEBHOOK_URL = os.getenv("WELLNESS_WEBHOOK_URL", "")
 
 SUPABASE_URL = os.getenv("SUPABASE_URL", "")
-SUPABASE_KEY = os.getenv("SUPABASE_SERVICE_ROLE_KEY", "")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY", "")
 supabase_client: Optional[Client] = None
 if SUPABASE_URL and SUPABASE_KEY and create_client:
     supabase_client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 
-app = FastAPI(title="Wellness Navigator AI")
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:5173", # Local React testing
+        "https://rococo-crumble-54594e.netlify.app", # Your live frontend
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
